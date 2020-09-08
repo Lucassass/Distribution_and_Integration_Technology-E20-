@@ -18,16 +18,23 @@
      have the browser call your functions when user-generated events happen. */
 
   // it will hold the data about cars
-  let carArray = [{producer:"", model:""}];
+  const carArray = [];
 
-  var newArray = document.getElementById("mybtn").value;
-          carArray.push(newArray);
+  function addCar(){
+    var producer = document.getElementById("pname").value
+    var model = document.getElementById("mname").value
+    carArray.push({producer, model})
+    refreshCarList()
+  }
 
-  listOfCars.forEach(element => {
-			document.getElementById("carArray").innerHTML += "<div class='theCar'><span>" + element.producer + "</span>" + " " + element.model + "</span> <div>";
+  function refreshCarList(){
+    document.getElementById("listOfCars").innerHTML = "";
+    carArray.forEach(element => {
+			document.getElementById("listOfCars").innerHTML += "<div class='theCar'><span>" + element.producer + "</span>" + " " + element.model + "</span> <div>";
     });
+    document.getElementById("carStatistics").innerHTML = carArray.length.toString();
+  }
     
-    console.log(listOfCars);
 
 </script>	
 
@@ -56,7 +63,7 @@
       <input type="text" id="mname" name="mname"></input>
     </form>
 
-    <button id="mybtn" type="submit" form="form" value="Submit">submit</button>
+    <button id="mybtn" onclick="addCar()">submit</button>
 
     <hr/>
     <div id="listOfCars">...</div>
