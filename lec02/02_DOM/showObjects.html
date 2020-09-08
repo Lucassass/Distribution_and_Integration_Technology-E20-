@@ -26,9 +26,14 @@ console.log(carArray);
 
 /* change the code below to print a div per car, with 2 spans, 
 	one for the producer and one for the model */
-document.getElementById("cars").innerHTML =
+/* document.getElementById("cars").innerHTML =
     "<div class='theCar'><span>" + carArray[0].producer + "</span>"
-									+ "<span>...</span> </div>";
+									+ "<span>...</span> </div>"; */
+
+		carArray.forEach(element => {
+			document.getElementById("cars").innerHTML += "<div class='theCar'><span>" + element.producer + "</span>" + " " + element.model + "</span> <div>";
+		});
+
 </script>
 </body>
 </html>

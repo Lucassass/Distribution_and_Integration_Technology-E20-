@@ -1,28 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 	<style>
 	.theCar {
 		border-style: solid;
 		border-width: 1px;
 		color: blue;
 	}
-	</style>
+</style>
+  
 <script>
+
 /* - Create functions to perform the various operations
      needed in this page. 
    - Connect these functions with your HTML elements below, to
      have the browser call your functions when user-generated events happen. */
 
   // it will hold the data about cars
-  let carArray = [];
+  let carArray = [{producer:"", model:""}];
+
+  var newArray = document.getElementById("mybtn").value;
+          carArray.push(newArray);
+
+  listOfCars.forEach(element => {
+			document.getElementById("carArray").innerHTML += "<div class='theCar'><span>" + element.producer + "</span>" + " " + element.model + "</span> <div>";
+    });
+    
+    console.log(listOfCars);
+
 </script>	
+
 </head>
 <body>
     <h1>Car Page</h1>
+    
     <p>
         <b>Here you can:</b>
     </p>
+
     <ul>
         <li>add a new car, by typing producer and model name. Use a form with some buttons to do that.</li>
         <li>refresh the list of existing cars (eventually after you have added a car). Make a button for that.</li>
@@ -31,10 +47,23 @@
     
     <hr/>
     <div>The input form</div>
+    <br></br>
+
+    <form id ="form">
+      <label for="pname">producer name:</label><br></br>
+      <input type="text" id="pname" name="pname"></input> <br></br>
+      <label for="mname">model name:</label><br></br>
+      <input type="text" id="mname" name="mname"></input>
+    </form>
+
+    <button id="mybtn" type="submit" form="form" value="Submit">submit</button>
+
     <hr/>
     <div id="listOfCars">...</div>
+
     <hr/>
     <div id="carStatistics">...</div>
+    
     <hr/>
 </body>
 </html>
