@@ -18,7 +18,7 @@
 	// === holds page data ===
 	class Data {
         constructor() {
-            this.value = 50;
+            this.value = 30;
             this.visualize();
         }
 		visualize() {
@@ -43,12 +43,44 @@
 		let myData = new Data();
 		myData.visualize();
 		// === setup UI ===============================
-		$("#plus").addClass("button").click(event => {
-			myData.add( +1 );
+		$("#-3").addClass("button").click(event => {
+			myData.add( -3 );
+			if(myData.value < 3){
+				console.log("your opponent lose");
+			}
+			if(Math.random < Math.random){
+				myData.add(-3);
+			} else{
+				myData.add(-2);
+			}
+			if(myData.value <3 ){
+				console.log("you lose");
+				myData.value = 30;
+				console.log("game has reset");
+			}
 		});
-		$("#minus").addClass("button").click(event => {
-			myData.add( -1 );
+
+		$("#-2").addClass("button").click(event => {
+			myData.add( -2 );
+			if(myData.value < 3){
+				console.log("your opponent lose");
+				myData.value = 30;
+				console.log("game has reset");
+			}
+			if(Math.random < Math.random){
+				myData.add(-3);
+			} else{
+				myData.add(-2);
+			}
+			if(mydata.value <3 ){
+				console.log("you lose");
+				myData.value = 30;
+				console.log("game has reset");
+			}
+			// === Comment ===============================
+			//check console for who lose and win and reset
 		});
+
 		$(".button").mousedown(event => { // prevent selection
 			event.preventDefault();
 		});
@@ -56,8 +88,8 @@
 </script>
 <body>
 <h1>Data + Visual + UI (mini-example)</h1>
-<p id="plus">[+1]</p>
-<p id="minus">[-1]</p>
+<p id="-3">[-3]</p>
+<p id="-2">[-2]</p>
 <p id="visualization"></p>
 </body>
 </html>
