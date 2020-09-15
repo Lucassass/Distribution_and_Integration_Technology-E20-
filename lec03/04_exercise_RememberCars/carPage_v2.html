@@ -10,18 +10,42 @@
 	</style>
 <script>
 // carArray will hold our data about cars
-let carArray = [];
+var carArray = [];
+
 
 // TO DO: save data in the local storage
-function saveData(data) { 
+function saveData(key, data) { 
         localStorage.setItem(key, JSON.stringify(data));
         console.log("stored!");	
-	};
+    };
 
 /* TO DO: load car data from the local storage: 
    - if there are data to read: load them into the carArray array
    - if not, leave the carArray empty */
-function loadData() { /*...*/ };
+function loadData() {
+    if (typeof(Storage) !== "undefined") {
+		// Retrieve the object from storage
+		let retrievedObject = localStorage.getItem('key');
+		if (retrievedObject) {
+			carArray = JSON.parse(retrievedObject);
+			}
+        } else {
+			console.log("ERROR: No Web Storage support..");
+        }
+        refreshList();
+  /*
+    //this out commented version underneath works aswell   
+    let localCarArray = [];
+    localCarArray = JSON.parse(localStorage.getItem("key"))
+    console.log(localCarArray);
+    if(localCarArray == null){
+        console.log("making new array");
+        carArray = [];
+    } else {
+        carArray = localCarArray;
+        console.log(carArray);
+    } */
+    };
 
 function refreshList() {
     let list = document.getElementById("listOfCars");
@@ -34,6 +58,18 @@ function refreshList() {
 
 window.onload = () => {	
     let addBtn = document.getElementById("addButton");
+    let resBtn = document.getElementById("resetButton");
+    resBtn.addEventListener("click", () => {
+        let theCarProducer = document.getElementById("carProducer");	
+		let theCarName = document.getElementById("carName");
+		carArray = [];
+		theCarName.value = "";
+		theCarProducer.value = "";
+		console.log( "button clicked -> car array reset");
+		saveData("key",carArray);
+		refreshList();
+    });
+
 	addBtn.addEventListener("click", () => {
 		let theCarProducer = document.getElementById("carProducer");	
 		let theCarName = document.getElementById("carName");
@@ -42,12 +78,13 @@ window.onload = () => {
 		theCarName.value = "";
 		theCarProducer.value = "";
 		console.log( "button clicked -> car added");
-		saveData();
+		saveData("key",carArray);
 		refreshList();
 	});
     loadData();
 	refreshList();
 };
+
 </script>
 </head>
 <body>
