@@ -13,7 +13,10 @@
 let carArray = [];
 
 // TO DO: save data in the local storage
-function saveData() { /*...*/ };
+function saveData(data) { 
+        localStorage.setItem(key, JSON.stringify(data));
+        console.log("stored!");	
+	};
 
 /* TO DO: load car data from the local storage: 
    - if there are data to read: load them into the carArray array
