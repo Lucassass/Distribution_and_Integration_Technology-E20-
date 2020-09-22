@@ -9,8 +9,10 @@
         let text = document.querySelector("input");
         let output = document.querySelector("#length");
         text.addEventListener("input", () => {
-            output.innerText = text.value.length;
+            setTimeout(function(){
+                output.innerText = text.value.length;
             // SLOW ME
+            }, 1500);
         });
         </script>
     </body>

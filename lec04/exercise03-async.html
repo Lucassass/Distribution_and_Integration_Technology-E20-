@@ -5,8 +5,8 @@
     <body>
         <p>See console (and try reloading repeatedly)</p>
         <script>
-            // an async dice roller, returning a promise
-            async function roll() {
+             // an async dice roller, returning a promise
+             async function roll() {
                 await new Promise(r => setTimeout(r, 500));
                 return 1+Math.floor(6*Math.random());
             }
@@ -14,9 +14,19 @@
             //await only allowed inside async function
             async function rollPair() {
                 //TODO
+                var a = [];
+                var rolls = 2;
+                
+                for (var i = 1; i <= rolls; i++){
+                    await new Promise(r => setTimeout(r, 500));
+                    var b = (1+Math.floor(6*Math.random()));
+                    a.push(b) 
+                }
+                return console.log(a);;
             }
-            
+
             rollPair().then(console.log);
+
         </script>
     </body>
 </html>

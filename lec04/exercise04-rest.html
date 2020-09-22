@@ -17,6 +17,11 @@
                 if (confirm("Update user '" + name + "'?")) {
                     console.log('update', name);
                     // TODO: create fetch PUT request
+                    fetch("https://jsonplaceholder.typicode.com/users/1", { 
+                        method : "PUT",
+                        body : JSON.stringify({ id : 1, name : name}),
+                        headers: { "Content-type": "application/json" }})
+                        .then(resp => console.log(resp.status));
                 }
             }
             
@@ -25,6 +30,11 @@
                 if (confirm("Delete user '" + name + "'?")) {
                     console.log('delete', name);
                     // TODO: create fetch DELETE request
+                    fetch("https://jsonplaceholder.typicode.com/users/1", { 
+                        method : "DELETE",
+                        body : JSON.stringify({name : name}),
+                        headers: { "Content-type": "application/json" }})
+                        .then(resp => console.log(resp.status));
                 }
             }
             
@@ -49,6 +59,7 @@
                 usertable = document.getElementById("usertable");
                 updatebutton = document.getElementById("update");
                 deletebutton = document.getElementById("delete");
+                //you have to click on one of the names in teh table to activate buttons
                 updatebutton.disabled = true;
                 updatebutton.addEventListener("click", updateUser);
                 deletebutton.disabled = true;
@@ -80,6 +91,7 @@
                     tableelem.appendChild(row);
                 }
             }
+
         </script>
     </head>
     <body>
