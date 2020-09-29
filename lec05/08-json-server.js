@@ -24,6 +24,8 @@ dispatch.GET = (request, response) => {
 }
 
 http.createServer((request, response) => {
+    response.setHeader('Access-Control-Allow-Origin', '*');
+    response.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
     console.log(request.method, request.url);
     try { dispatch[request.method](request, response); }
     catch (err) {

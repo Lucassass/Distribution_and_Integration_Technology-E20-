@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "This repository is for exercises during my Lectures of \"Distribution and Integration Technologies (E20) \" on third semester of Software Engineering 2020.",
   "main": "index.js",
- 
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Lucassass/Distribution_and_Integration_Technology-E20-/issues"
   },
-  "homepage": "https://github.com/Lucassass/Distribution_and_Integration_Technology-E20-#readme"
+  "homepage": "https://github.com/Lucassass/Distribution_and_Integration_Technology-E20-#readme",
+  "dependencies": {
+    "esm": "^3.2.25"
+  }
 }

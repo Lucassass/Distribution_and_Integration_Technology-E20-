@@ -32,6 +32,33 @@ Make a Node web-server that responds to
     with `405 (Method not allowed)`
  - other URLs, e.g., `"/path/resource"` with `404 (Not found)`
 
+    const http = require('http');
+
+    let dispatch = Object.create(null); //create empty object (no prototype)
+
+    dispatch.GET = request, response) => { 
+        response.writeHead(200, {'Content-Type': 'text plain'}); 
+        response.end("Thanks for the GET request\n");
+    }
+
+    dispatch.POST = (request, response) => {            //req.body may arrive in chuncks 
+        /*
+        request.on('data', data => console.log(''+data));   //chunk arrived, we are not suppost to allow it 
+        */
+        request.on('end', () => {                           //no more chunks
+            response.writeHead(405, {'Content-Type': 'text/plain'});
+            response.end("Methode not allowed\n");
+        });
+    }
+
+    let server = http.createServer((request,response)=>{
+        console.log(request.methode, request.url);
+        try { dispatch[request.methode](request,response); }
+        catch (err) { //no methode handler found
+            reponse.writeHead(404, {'Content-Type': 'Text/plain'});
+            response.end('Not found\n');
+        }
+    })
 
 Exercise: Make the server sluggish
 ----------------------------------
