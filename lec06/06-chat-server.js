@@ -1,14 +1,15 @@
-const {Server} = require('ws');
-let wsserver = new Server({ port: 8080, path: '/' });
-let latest = { time: Date.now(), msg: "no messages yet" };
+const http = require('http');
 
- wsserver.on('connection', ws => {
-    console.log("New client connected");
-    ws.send(JSON.stringify(latest)+"\n");
-    ws.on('close', (code, msg) => console.log("Connection closing", code, msg));
-    ws.on('message', msg => {
-        latest = { time: Date.now(), msg: msg };
-        console.log("Message arrived", msg);
-        wsserver.clients.forEach(c => c.send(JSON.stringify(latest)));
-    });
-});
+let latest = { time: Date.now(), msg: "no messages yet"};
+
+let server = http.createServer((req,res) => {
+    res.writeHead(200, {"Content-Type": "text/json",
+                        "Access-Control-Allow-Origin": "*"});
+    res.end(JSON.stringify(latest)+"\n");
+})
+server.listen(8080);
+
+process.stdin.on('data', data => {
+    latest = { time: Date.now(), msg:  data.toString() };
+    process.stdout.write("new message at " + latest.time
+                         + ": " + latest.msg)});
